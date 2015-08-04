@@ -5,6 +5,7 @@
   <% end %>
   <% else %>
     <h4>Downgrade Account</h4>
-    <h5>Are you sure you want to downgrade to a standard account? </h5>
-    <%= link_to "Downgrade my account", downgrade_path, class: 'btn btn-warning' %>
+    <h5>Are you sure you want to downgrade to a standard account?<br>
+    If you downgrade your account, your private wikis will become public. </h5>
+    <%= link_to "Downgrade my account", downgrade_path, class: 'btn btn-warning', data: { confirm: 'Are you sure you want to make your wikis public?' }%>
   <% end %>
