@@ -24,14 +24,18 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-   current_user.update_attribute(:role, 'premium') 
-
     flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-    redirect_to root_path
+    current_user.upgrade_account(current_user)
+    redirect_to new_charge_path
 
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to new_charge_path
+  end
+
+  def update
+    current_user.downgrade_account(current_user)
     redirect_to new_charge_path
   end
 end

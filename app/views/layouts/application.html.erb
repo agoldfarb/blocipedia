@@ -9,24 +9,24 @@
   </head>
   <body>
     <div class='container'>
-         <ul class='nav nav-tabs'>
-          <li><%= link_to 'Blocipedia', root_url %></li>
-          <li><%= link_to 'About', about_path %> </li>
-          <li><%= link_to 'Wikis', wikis_path %> </li>
-          <li><%= link_to 'New Wiki', new_wiki_path %> </li>
+      <ul class='nav nav-tabs'>
+        <li><%= link_to 'Blocipedia', root_url %></li>
+        <li><%= link_to 'About', about_path %> </li>
+        <li><%= link_to 'Wikis', wikis_path %> </li>
+        <li><%= link_to 'New Wiki', new_wiki_path %> </li>
 
-          <div class='user-info pull-right'>
-            <% if current_user && current_user.role == 'premium' %>
+        <div class='user-info pull-right'>
+          <% if current_user && current_user.role == 'premium' %>
             Hello <%= link_to current_user.email, edit_user_registration_path %>! | <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-           <% elsif current_user && current_user.role == 'standard' %>
+          <% elsif current_user && current_user.role == 'standard' %>
              Hello <%= link_to current_user.email, edit_user_registration_path %>! | <%= link_to "Upgrade to Premium", new_charge_path %> | <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-            <% else %>
-              <%= link_to 'Sign In', new_user_session_path %> or
-              <%= link_to 'Sign Up', new_user_registration_path %>
-            <% end %>
-          </div>
-        </ul>
-      </div>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path %> or
+            <%= link_to 'Sign Up', new_user_registration_path %>
+          <% end %>
+        </div>
+      </ul>
+    </div>
 
     <% if flash[:notice] %>
         <div class='alert alert-success'>
@@ -43,8 +43,9 @@
           <button type='button' class='close' data-dismiss='alert'>&times;</button>
           <%= flash[:alert] %>
         </div>
-      <% end %>
+    <% end %>
+
     <%= yield %>
 
-    </body>
-    </html>
+  </body>
+</html>
