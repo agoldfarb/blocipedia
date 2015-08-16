@@ -1,0 +1,11 @@
+<b> Manage Collaborators </b>
+<% @users.each do |user| %>
+  <div>
+  <%= user.email %>
+  <% if @wiki.collaborators.pluck("user_id").include?(user.id) %>
+    <%= link_to "Delete", wiki_collaborator_path(@wiki, user), method: :delete %>
+  <% else %>
+    <%= link_to "Add", wiki_collaborators_path(@wiki, user_id: user.id), method: :post %>
+  <% end %>
+  </div>
+<% end %>

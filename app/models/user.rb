@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :wikis
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
+  
   after_initialize :set_default_role
 
   validates :role, presence: true, inclusion: { in: %w(standard premium admin), message: "should be one of admin, premium, standard" }
@@ -33,5 +35,9 @@ class User < ActiveRecord::Base
     user.role = 'standard'
     user.save
     user.wikis.where(private: true).update_all(private: false)
+  end
+
+  def is_owner_of?(wiki)
+    admin? || wiki.users.include?(self) || wiki.new_record?
   end
 end

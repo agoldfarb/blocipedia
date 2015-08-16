@@ -18,6 +18,9 @@
           <% end %>
         </div>
       <% end %> 
+      <% if current_user.is_owner_of? @wiki %>
+        <%= render partial: 'collaborators/form' %>
+      <% end %>
       <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>
