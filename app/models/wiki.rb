@@ -5,12 +5,11 @@ class Wiki < ActiveRecord::Base
 
   default_scope { order('created_at DESC') }
 
-
   def public?
     !self.private
   end
 
   def make_public
-    self.update_attribute(public: false)
+    self.update_attribute(public: true)
   end
 end
